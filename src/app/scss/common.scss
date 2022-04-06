@@ -1,5 +1,45 @@
-body {
-  background: linear-gradient(to bottom, #7f28c4, #30236a, #000, #000, #000);
-  height: 100vh;
-  width: 100%;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+
+* {
+  font-family: "Inter", sans-serif;
+  color: #fff;
+}
+
+.coin-item {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  padding: 23px 10px;
+  max-width: 320px;
+  width: 80%;
+  &:not(:last-child) {
+    border-bottom: 0.5px solid #2e2e2e;
+  }
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    margin-right: 20px;
+  }
+  h4 {
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+  h6 {
+    font-weight: 400;
+    font-size: 12px;
+    color: #777777;
+    line-height: 15px;
+    margin: 0;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 600px) {
+  .coin-item {
+    padding: 23px 0px;
+    width: 90%;
+    margin: 0 15px;
+  }
 }

@@ -1,9 +1,14 @@
 /* eslint-disable prettier/prettier */
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import socket from "../../network/socket";
+import arrow from "../../../assets/arrow.svg";
+import "./index.scss";
 
+const ListCoins = React.lazy(() => import("../../components/ListCoins"));
 class Home extends Component {
-  state = {};
+  state = {
+    coinsList: [],
+  };
 
   componentDidMount = async () => {
     socket.emit(
@@ -16,12 +21,55 @@ class Home extends Component {
       })
     );
     socket.on("top_gainers_and_losers", (data) => {
-      console.log("event", data);
+      this.setState(
+        {
+          coinsList: data
+            .sort((a, b) => b.pricePercentChange - a.pricePercentChange)
+            .splice(0, 4),
+        }
+        // () => socket.close()
+      );
     });
   };
 
   render() {
-    return <div>Home Page</div>;
+    const { coinsList } = this.state;
+    console.log(coinsList);
+    return (
+      <div className="home">
+        <div className="flex-container">
+          <div className="flex-box left">
+            <h1>Hi John,</h1>
+            <h3>Complete your KYC</h3>
+            <p>
+              and experience the world class <br /> bitcoin app defi
+            </p>
+            <div className="button">
+              <span>start kyc</span>
+              <img src={arrow} alt="arrow" />
+            </div>
+          </div>
+          <div className="flex-box">
+            <Suspense fallback="...Loading">
+              <ListCoins title="Ideal for new investors" list={coinsList} />
+            </Suspense>
+          </div>
+        </div>
+        <hr />
+        <div className="flex-container">
+          <div className="flex-box left">
+            <Suspense fallback="...Loading">
+              <ListCoins title="Trending Coins" list={coinsList} />
+            </Suspense>
+          </div>
+          <div className="flex-box">
+            <Suspense fallback="...Loading">
+              <ListCoins title="Non trending Coins" list={coinsList} />
+            </Suspense>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 
