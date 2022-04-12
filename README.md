@@ -62,8 +62,7 @@ src\
          |-- socket.js
      |--scss\          # Common Styling
  |--test\
-     |--containers\    # Main Pages
-         |-- Home.test.js
+     |-- Home.test.js
 ```
 
 ## Linting

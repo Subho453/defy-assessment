@@ -2,8 +2,8 @@
 import React from "react";
 import Adapter from "enzyme-adapter-react-16";
 import { shallow, configure } from "enzyme";
-import Home from "../../app/containers/Home";
-import socket from "../../app/network/socket";
+import Home from "../app/containers/Home";
+import socket from "../app/network/socket";
 
 let wrapper;
 
