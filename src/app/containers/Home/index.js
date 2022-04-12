@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { Component, Suspense } from "react";
 import socket from "../../network/socket";
 import arrow from "../../../assets/arrow.svg";
@@ -11,6 +10,10 @@ class Home extends Component {
   };
 
   componentDidMount = async () => {
+    this.getTopGainerAndLosers();
+  };
+
+  getTopGainerAndLosers = () => {
     socket.emit(
       "top_gainers_and_losers",
       JSON.stringify({
@@ -20,21 +23,23 @@ class Home extends Component {
         },
       })
     );
-    socket.on("top_gainers_and_losers", (data) => {
-      this.setState(
-        {
-          coinsList: data
-            .sort((a, b) => b.pricePercentChange - a.pricePercentChange)
-            .splice(0, 4),
-        }
-        // () => socket.close()
-      );
-    });
+    socket.on("top_gainers_and_losers", (data) => this.messageListener(data));
+  };
+
+  messageListener = (data) => {
+    this.setState(
+      {
+        coinsList: data
+          .sort((a, b) => b.pricePercentChange - a.pricePercentChange)
+          .splice(0, 4),
+      }
+      // () => socket.close()
+    );
   };
 
   render() {
     const { coinsList } = this.state;
-    console.log(coinsList);
+    // console.log(coinsList);
     return (
       <div className="home">
         <div className="flex-container">
