@@ -51,11 +51,19 @@ REACT_APP_SOCKET_ENDPOINT=<Socket-Endpoint>
 
 ```
 src\
- |--app\         # Environment variables
+ |--app\
      |--components\    # Components used
+         |-- ListCoins.js
      |--containers\    # Main Pages
+         |-- Home\
+              |-- index.js
+              |-- index.scss
      |--network\       # Network connections or API
+         |-- socket.js
      |--scss\          # Common Styling
+ |--test\
+     |--containers\    # Main Pages
+         |-- Home.test.js
 ```
 
 ## Linting
